@@ -52,6 +52,7 @@ This project is achiving the following goals
 - README.md
 - sparkify_data_engineering.ipynb # jupyter notebook - analyzing data, source data, and transform data
 - sparkify_modelling.ipynb # jupyter notebook - featuring data and create prediction models.
+- capstone-project-writeup.docx # Project Writeup
 
 </pre>
 
