@@ -14,6 +14,10 @@ This project is achiving the following goals
 - sparkify_modelling.ipynb: manual work on creating prediction models 
 
 
+### Project Result
+
+After implementing prediction models, we test it by using 20% of data. The accuracy is 73.9% from Gradient-Boosted Tree Model.
+
 ### Web Application Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
@@ -56,6 +60,25 @@ This project is achiving the following goals
 
 </pre>
 
+###  Libraries need for Running Code
+- pyspark
+- pyspark.sql
+- pyspark.sql.functions
+- pyspark.ml
+- pyspark.ml.classification
+- pyspark.ml.feature
+- pyspark.ml.tuning
+- pyspark.ml.evaluation
+- sys
+- timeit
+- datetime
+- flask
+- plotly.graph_objs
+- pandas
+- json
+- plotly
+- findspark
+
 ### Note:
 
 - Both jupyter notebook and web application are writen in pyspark. To be able to run the applications and notebook successfully, you will need to have spark installed on your local machine.
@@ -63,3 +86,8 @@ This project is achiving the following goals
 - I strongly recommended to run the scripts under conda environment. It's easy to install required python libs.
 - The 12GB source file can be found on Udacity S3 Buckets. You can download it to local. However, if it takes too long, a small file is also avaiable on the S3.
 - Running Spark ML jobs for creating modelling takes time depends on your machine configurations. However, you can skip the process as I have already save those models under folder 'app/trained_model/'
+
+### Project Github 
+
+https://github.com/zhangshen20/capstone-project-sparkify
+
