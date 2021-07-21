@@ -23,6 +23,29 @@ import tempfile
 # sys.path.insert(1, '../models')
 app = Flask(__name__)
 
+training_file = 'spark_user_data.csv'
+
+# conf = SparkConf().setMaster("local[*]").setAppName("webApp") #.set("spark.sql.shuffle.partitions", 4)
+# sc = SparkContext(conf=conf)
+# sc.setLogLevel("ERROR")
+
+# spark = SparkSession(sc)
+
+spark = SparkSession \
+        .builder \
+        .appName("WebApp") \
+        .config("spark.sql.shuffle.partitions", 2) \
+        .getOrCreate()
+
+df = spark.read.csv(training_file, header=True, inferSchema=True)
+df = df.withColumn('label', df.churn)
+
+gbt_model = PipelineModel.load('trained_model/GBTClassificationModel')
+lr_model = PipelineModel.load('trained_model/LogisticRegressionModel')
+rf_model = PipelineModel.load('trained_model/RandomForestClassificationModel')
+
+df_pd = pd.read_csv(training_file)
+
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
@@ -274,21 +297,5 @@ def main():
     app.run(host='localhost', port=3001, debug=True)
 
 if __name__ == '__main__':
-
-    training_file = 'spark_user_data.csv'
-
-    conf = SparkConf().setMaster("local[*]").setAppName("multigridsearch")
-    sc = SparkContext(conf=conf)
-    sc.setLogLevel("ERROR")
-
-    spark = SparkSession(sc)
-    df = spark.read.csv(training_file, header=True, inferSchema=True)
-    df = df.withColumn('label', df.churn)
-
-    gbt_model = PipelineModel.load('trained_model/GBTClassificationModel')
-    lr_model = PipelineModel.load('trained_model/LogisticRegressionModel')
-    rf_model = PipelineModel.load('trained_model/RandomForestClassificationModel')
-
-    df_pd = pd.read_csv(training_file)
 
     main()
